@@ -1,26 +1,48 @@
 'use strict';
 
-var nameVar = 'prem';
-var nameVar = 'abhishek';
-console.log(nameVar);
+//arguments object - no longer bound with arrow functions
 
-var nameLet = 'prem';
-nameLet = 'abhishek';
-console.log(nameLet);
+var add = function add(a, b) {
+    //console.log(arguments);
+    return a + b;
+};
 
-var nameConst = 'prem';
-console.log(nameConst);
+console.log(add(43, 23));
 
-//Block level scope - let and const
-var fullName = 'Prem Kagrani';
-var firstName = void 0;
+//this keyword - no longer bound with arrow functions 
 
-function getFirstName() {
-    if (fullName) {
-        firstName = fullName.split(' ')[0];
-        return firstName;
+var user = {
+    name: "Prem Kagrani",
+    cities: ['Lucknow', 'Gurgaon', 'Bangalore'],
+    printPlacesLived: function printPlacesLived() {
+        var _this = this;
+
+        console.log(this.name);
+        console.log(this.cities);
+        this.cities.forEach(function (city) {
+            console.log(_this.name + " has lived in " + city);
+        });
+    },
+    printPlaces: function printPlaces() {
+        return this.cities.map(function (city) {
+            return city + " is beautiful";
+        });
     }
-}
+};
+user.printPlacesLived();
+console.log(user.printPlaces());
 
-firstName = getFirstName();
-console.log(firstName);
+//Challenge multiply
+
+var multiplier = {
+    numbers: [4, 5, 2],
+    multiplyBy: 5,
+    multiply: function multiply() {
+        var _this2 = this;
+
+        return this.numbers.map(function (number) {
+            return number * _this2.multiplyBy;
+        });
+    }
+};
+console.log(multiplier.multiply());
